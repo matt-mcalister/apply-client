@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import exampleReducer from './exampleReducer'
-//import top level reducers
+import authReducer from './authReducer'
 
 const rootReducer = combineReducers({
-  //your reducers here
-  exampleState: exampleReducer
+  auth: authReducer
 })
 
 export default rootReducer;
