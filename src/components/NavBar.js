@@ -1,18 +1,20 @@
 import React from "react";
 import Sidebar from "react-sidebar"
+import { NavLink } from "react-router-dom"
 
-const NavBarContent = () => {
+const NavBarContent = ({handleClick}) => {
   return (
     <div className="nav-bar open">
       <h1 className="logo">app.ly</h1>
       <div className="nav-links">
-        <h3>home</h3>
-        <h3>opportunies</h3>
-        <h3>organizations</h3>
+        <NavLink to="/home" onClick={handleClick}>home</NavLink>
+        <NavLink to="/opportunities" onClick={handleClick}>opportunities</NavLink>
+        <NavLink to="/organizations" onClick={handleClick}>organizations</NavLink>
       </div>
-      <div className="bottom-links">
-        <h3>settings</h3>
-        <h3>sign out</h3>
+      <div className="nav-links">
+        <NavLink to="/settings" onClick={handleClick}>settings</NavLink>
+        <NavLink to="/login" onClick={handleClick}>login</NavLink>
+        <NavLink to="/signup" onClick={handleClick}>sign up</NavLink>
       </div>
     </div>
   )
@@ -30,7 +32,7 @@ class NavBar extends React.Component {
   render() {
     return (
         <Sidebar
-        sidebar={<NavBarContent />}
+        sidebar={<NavBarContent handleClick={() => this.onSetSidebarOpen(false)}/>}
         open={this.state.sidebarOpen}
         onSetOpen={this.onSetSidebarOpen}
         >
