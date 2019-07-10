@@ -8,6 +8,9 @@ import Organizations from "./components/Organizations"
 import Opportunities from "./components/Opportunities"
 import Settings from "./components/Settings"
 
+import { connect } from "react-redux"
+import { getUser } from "./actions"
+
 
 class App extends Component {
 
@@ -15,10 +18,15 @@ class App extends Component {
     sideBarOpen: false
   }
 
+  componentDidMount(){
+    if (localStorage.getItem("jwt-app.ly")) {
+      this.props.getUser()
+    }
+  }
+
   onSetSidebarOpen = (open) => {
    this.setState({ sidebarOpen: open });
- }
-
+  }
 
   render() {
     return (
@@ -59,4 +67,10 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user
+  }
+}
+
+export default connect(mapStateToProps, {getUser})(App)
