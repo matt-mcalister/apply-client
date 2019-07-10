@@ -47,3 +47,43 @@ h1.logo {
   font-weight: bold;
   text-decoration: none;
 }
+
+.flex {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.centered {
+  align-items: center;
+  justify-content: center;
+}
+
+.full-page {
+  height: calc(100vh - 50px);
+  width: calc(100vw - 50px);
+  margin: auto;
+
+}
+
+.auth-form > input.button {
+  align-self: center;
+}
+
+.form-input-container {
+  margin: 5px;
+}
+
+.form-input-container > input {
+  width: 100%;
+}
+
+.button {
+  font-size: 120%;
+  background-color: #004E2A;
+  color: white;
+  border: none;
+  padding: 10px;
+}
