@@ -24,11 +24,19 @@ class App extends Component {
     return (
       <NavBar>
         <Switch>
-          <Route exact path="/login" render={() => {
-            return <Login />
+          <Route exact path="/login" render={(routerProps) => {
+            if (localStorage.getItem("jwt-app.ly")){
+              return <Redirect to="/" />
+            } else {
+              return <Login {...routerProps}/>
+            }
           }}/>
-          <Route exact path="/signup" render={() => {
-            return <SignUp />
+          <Route exact path="/signup" render={(routerProps) => {
+            if (localStorage.getItem("jwt-app.ly")){
+              return <Redirect to="/" />
+            } else {
+              return <SignUp {...routerProps}/>
+            }
           }}/>
           <Route exact path="/organizations" render={() => {
             return <Organizations />
