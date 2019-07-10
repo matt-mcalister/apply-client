@@ -7,9 +7,9 @@ export const signUp = ({first_name, last_name, email, password}, push) => {
     dispatch(clearErrors())
     adapter.signUp({user: {first_name, last_name, email, password}})
       .then(json => {
-        if (json.errors){
+        if (json.errors_array){
           dispatch(setErrors(json))
-        } else {
+        } else if (json.user && json.token) {
           dispatch(setUser(json))
           localStorage.setItem("jwt-app.ly", json.token)
           push("/")
@@ -24,15 +24,29 @@ export const login = ({email, password}, push) => {
     dispatch(clearErrors())
     adapter.login({email, password})
       .then(json => {
-        if (json.errors){
+        if (json.errors_array){
           dispatch(setErrors(json))
-        } else {
+        } else if (json.user && json.token) {
           dispatch(setUser(json))
           localStorage.setItem("jwt-app.ly", json.token)
           push("/")
         }
       })
       .catch(errs => dispatch(setErrors(errs)))
+  }
+}
+
+export const getUser = () => {
+  return (dispatch) => {
+    adapter.getUser()
+      .then(json => {
+        console.log(json);
+        if (json.errors_array){
+          dispatch(setErrors(json))
+        } else if (json.user) {
+          dispatch(setUser({...json, token: localStorage.getItem("jwt-app.ly")}))
+        }
+      })
   }
 }
 
