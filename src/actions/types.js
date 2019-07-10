@@ -1,1 +1,3 @@
-// export const CHANGE_MESSAGE = 'CHANGE_MESSAGE'
+export const SET_USER = 'SET_USER'
+export const SET_ERRORS = 'SET_ERRORS'
+export const CLEAR_ERRORS = 'CLEAR_ERRORS'
