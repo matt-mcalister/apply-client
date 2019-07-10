@@ -12,8 +12,25 @@ export const signUp = ({first_name, last_name, email, password}, push) => {
         } else {
           dispatch(setUser(json))
           localStorage.setItem("jwt-app.ly", json.token)
+          push("/")
         }
-        push("/")
+      })
+      .catch(errs => dispatch(setErrors(errs)))
+  }
+}
+
+export const login = ({email, password}, push) => {
+  return (dispatch) => {
+    dispatch(clearErrors())
+    adapter.login({email, password})
+      .then(json => {
+        if (json.errors){
+          dispatch(setErrors(json))
+        } else {
+          dispatch(setUser(json))
+          localStorage.setItem("jwt-app.ly", json.token)
+          push("/")
+        }
       })
       .catch(errs => dispatch(setErrors(errs)))
   }
