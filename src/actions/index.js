@@ -40,7 +40,6 @@ export const getUser = () => {
   return (dispatch) => {
     adapter.getUser()
       .then(json => {
-        console.log(json);
         if (json.errors_array){
           dispatch(setErrors(json))
         } else if (json.user) {
