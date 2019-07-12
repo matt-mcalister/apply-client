@@ -50,6 +50,13 @@ export const getUser = () => {
   }
 }
 
+export const signOut = () => {
+  localStorage.removeItem("jwt-app.ly")
+  return {
+    type: actions.SIGN_OUT
+  }
+}
+
 const setUser = (userObj) => {
   return {
     type: actions.SET_USER,
