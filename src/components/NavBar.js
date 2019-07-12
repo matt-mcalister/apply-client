@@ -1,8 +1,11 @@
 import React from "react";
 import Sidebar from "react-sidebar"
 import { NavLink } from "react-router-dom"
+import { connect } from "react-redux"
+import { signOut } from "../actions"
 
-const NavBarContent = ({handleClick}) => {
+const mapStateToProps = state => ({token: state.auth.token})
+const NavBarContent = connect(mapStateToProps, { signOut })(({handleClick, signOut, token}) => {
   return (
     <div className="nav-bar open">
       <h1 className="logo">app.ly</h1>
@@ -13,12 +16,17 @@ const NavBarContent = ({handleClick}) => {
       </div>
       <div className="nav-links">
         <NavLink to="/settings" onClick={handleClick}>settings</NavLink>
-        <NavLink to="/login" onClick={handleClick}>login</NavLink>
-        <NavLink to="/signup" onClick={handleClick}>sign up</NavLink>
+        {
+          token ? <h2 onClick={signOut} style={{cursor: "pointer"}}>sign out</h2> :
+          (<React.Fragment>
+            <NavLink to="/login" onClick={handleClick}>login</NavLink>
+            <NavLink to="/signup" onClick={handleClick}>sign up</NavLink>
+          </React.Fragment>)
+        }
       </div>
     </div>
   )
-}
+})
 
 class NavBar extends React.Component {
   state = {
