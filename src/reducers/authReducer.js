@@ -15,6 +15,8 @@ const authReducer = (state = initialState, action) => {
       return {...state, errors: action.payload}
     case actions.CLEAR_ERRORS:
       return {...state, errors: null}
+    case actions.SIGN_OUT:
+      return initialState
     default:
     return state
 
