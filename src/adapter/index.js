@@ -12,6 +12,10 @@ export const getUser = () => {
   return getRequest("/getuser")
 }
 
+export const getRecentOrgs = () => {
+  return getRequest("/organizations")
+}
+
 
 const postRequest = (route, body) => {
   return fetch(BASE_URL + route, {
