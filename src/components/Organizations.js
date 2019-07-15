@@ -1,14 +1,12 @@
 import React from "react"
+import Recents from "./Recents"
 
-class Organizations extends React.Component {
-
-  render(){
+const Organizations = (props) => {
     return (
-      <div>
-        Organizations
+      <div className="dashboard">
+        <Recents type="ORGANIZATION"/>
       </div>
     )
   }
-}
 
 export default Organizations
