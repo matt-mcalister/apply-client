@@ -10,8 +10,8 @@ export const signUp = ({first_name, last_name, email, password}, push) => {
         if (json.errors_array){
           dispatch(setErrors(json))
         } else if (json.user && json.token) {
-          dispatch(setUser(json))
           localStorage.setItem("jwt-app.ly", json.token)
+          dispatch(setUser(json))
           push("/")
         }
       })
@@ -27,8 +27,8 @@ export const login = ({email, password}, push) => {
         if (json.errors_array){
           dispatch(setErrors(json))
         } else if (json.user && json.token) {
-          dispatch(setUser(json))
           localStorage.setItem("jwt-app.ly", json.token)
+          dispatch(setUser(json))
           push("/")
         }
       })
@@ -49,6 +49,14 @@ export const getUser = () => {
   }
 }
 
+export const getRecentOrgs = () => {
+  return (dispatch) => {
+    adapter.getRecentOrgs().then(recents => {
+      dispatch(setRecentOrgs(recents))
+    })
+  }
+}
+
 export const signOut = () => {
   localStorage.removeItem("jwt-app.ly")
   return {
@@ -56,10 +64,20 @@ export const signOut = () => {
   }
 }
 
-const setUser = (userObj) => {
+const setRecentOrgs = (recents) => {
   return {
-    type: actions.SET_USER,
-    payload: userObj
+    type: actions.SET_RECENT_ORGS,
+    payload: recents
+  }
+}
+
+const setUser = (userObj) => {
+  return (dispatch) => {
+    dispatch(getRecentOrgs())
+    return {
+      type: actions.SET_USER,
+      payload: userObj
+    }
   }
 }
 
